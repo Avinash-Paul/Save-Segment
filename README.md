@@ -1,7 +1,9 @@
 Save Segment App
+
 This application allows users to save segments by specifying segment names and schemas. It is built using React and Material-UI.
 
 Features
+
 Create and save segments with a specified name and schema.
 Add and remove schemas dynamically.
 Save the segment data by sending a POST request to a webhook.
