@@ -1,70 +1,71 @@
-# Getting Started with Create React App
+Save Segment App
+This application allows users to save segments by specifying segment names and schemas. It is built using React and Material-UI.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Features
+Create and save segments with a specified name and schema.
+Add and remove schemas dynamically.
+Save the segment data by sending a POST request to a webhook.
+Installation
+Clone the repository:
 
-## Available Scripts
+bash
+Copy code
+git clone https://github.com/Avinash-Paul/Save-Segment.git
+cd save-segment-app
+Install the dependencies:
 
-In the project directory, you can run:
+bash
+Copy code
+npm install
+Start the development server:
 
-### `npm start`
+bash
+Copy code
+npm start
+Usage
+Open your browser and navigate to http://localhost:3000.
+Click the "Save segment" button to open the segment-saving popup.
+Enter the name of the segment.
+Add schemas to the segment by selecting from the dropdown and clicking "Add new schema".
+Once all schemas are added, click "Save the segment" to save it.
+Handling CORS Issue
+The application sends a POST request to a webhook. Due to CORS policy, requests from http://localhost:3000 to external APIs may be blocked. To bypass this, we use the CORS Anywhere proxy.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Running CORS Anywhere
+Clone the CORS Anywhere repository:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+bash
+Copy code
+git clone https://github.com/Rob--W/cors-anywhere.git
+cd cors-anywhere
+Install the dependencies:
 
-### `npm test`
+bash
+Copy code
+npm install
+Start the CORS Anywhere server:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+bash
+Copy code
+npm start
+The server will run on http://localhost:8080.
 
-### `npm run build`
+Modifying the Application
+Update the URL in App.js to use the CORS Anywhere proxy. Instead of directly calling the webhook URL, use the following format:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+javascript
+Copy code
+const response = await fetch('http://localhost:8080/https://webhook.site/dd9b0388-d25c-49cf-ba36-6f0ced557d56', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(payload),
+});
+This ensures that the request is routed through the CORS Anywhere proxy, bypassing the CORS policy.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Troubleshooting
+If you encounter a CORS issue, ensure that the CORS Anywhere server is running on http://localhost:8080.
+Ensure all dependencies are installed and the development server is running on http://localhost:3000.
+License
+This project is licensed under the MIT License. See the LICENSE file for details.
